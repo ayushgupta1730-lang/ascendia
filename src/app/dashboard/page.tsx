@@ -6,8 +6,11 @@ import { motion } from "framer-motion";
 
 export default function DashboardPage() {
 
-  const { data: session } =
+  const sessionData =
     useSession();
+
+  const session =
+    sessionData?.data;
 
   const stats = [
 
@@ -42,6 +45,7 @@ export default function DashboardPage() {
   ];
 
   return (
+
     <main className="min-h-screen bg-slate-50 px-6 py-16">
 
       <div className="mx-auto max-w-7xl">
@@ -58,8 +62,7 @@ export default function DashboardPage() {
 
             <h1 className="mt-4 text-5xl font-black leading-tight text-slate-900">
 
-              Welcome back,
-              {" "}
+              Welcome back{" "}
               {session?.user?.name ||
                 "Student"} 👋
 
@@ -83,7 +86,10 @@ export default function DashboardPage() {
             </p>
 
             <h3 className="mt-3 text-xl font-black text-slate-900">
-              {session?.user?.email}
+
+              {session?.user?.email ||
+                "student@ascendia.ai"}
+
             </h3>
 
           </div>
@@ -279,6 +285,7 @@ export default function DashboardPage() {
       </div>
 
     </main>
+
   );
 
 }
