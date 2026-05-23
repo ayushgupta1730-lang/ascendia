@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  overflow-x: hidden;
+
+  position: relative;
+}
+
+/* PREMIUM SOFT BACKGROUND GLOW */
+
+body::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(99, 102, 241, 0.06),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(168, 85, 247, 0.06),
+      transparent 22%
+    );
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+/* SMOOTH TEXT SELECTION */
+
+::selection {
+  background: #8b5cf6;
+  color: white;
+}
+
+/* PREMIUM SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    to bottom,
+    #6366f1,
+    #8b5cf6
+  );
+
+  border-radius: 999px;
+}
+
+/* CLEAN LINKS */
+
+a {
+  text-decoration: none;
+}
+
+/* CLEAN BUTTONS */
+
+button {
+  cursor: pointer;
+}
