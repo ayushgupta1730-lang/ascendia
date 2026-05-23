@@ -1,6 +1,6 @@
-export const dynamic = "force-dynamic";
-
 "use client";
+
+export const dynamic = "force-dynamic";
 
 import { useEffect } from "react";
 
@@ -51,60 +51,32 @@ export default function HomePage() {
 
       <Navbar />
 
-      {/* HERO */}
-
       <section id="top">
-
         <HeroSection />
-
       </section>
-
-      {/* STATS */}
 
       <StatsSection />
 
-      {/* DASHBOARD */}
-
       <section id="dashboard">
-
         <DashboardPreview />
-
       </section>
-
-      {/* FEATURES */}
 
       <section id="features">
-
         <FeaturesSection />
-
       </section>
-
-      {/* COMPARISON */}
 
       <CareerComparison />
 
-      {/* COLLEGES */}
-
       <section id="colleges">
-
         <CollegeExplorer />
-
       </section>
-
-      {/* AI */}
 
       <section id="ai-counsellor">
-
         <AICounsellor />
-
       </section>
 
-      {/* ROADMAPS */}
-
       <section id="roadmaps">
-
         <RoadmapSection />
-
       </section>
 
       <Footer />
