@@ -2,17 +2,16 @@ import { NextResponse } from "next/server";
 
 import bcrypt from "bcrypt";
 
-import crypto from "crypto";
-
 import { prisma } from "@/lib/prisma";
 
-import { sendVerificationEmail } from "@/lib/mail";
-
-export async function POST(request: Request) {
+export async function POST(
+  request: Request
+) {
 
   try {
 
-    const body = await request.json();
+    const body =
+      await request.json();
 
     const {
       name,
@@ -28,7 +27,8 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "All fields are required.",
+          error:
+            "All fields are required.",
         },
         {
           status: 400,
@@ -48,7 +48,8 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         {
-          error: "User already exists.",
+          error:
+            "User already exists.",
         },
         {
           status: 400,
@@ -58,52 +59,27 @@ export async function POST(request: Request) {
     }
 
     const hashedPassword =
-      await bcrypt.hash(password, 10);
+      await bcrypt.hash(
+        password,
+        10
+      );
 
-    const user =
-      await prisma.user.create({
-
-        data: {
-          name,
-          email,
-          password: hashedPassword,
-        },
-
-      });
-
-    const verificationToken =
-      crypto.randomBytes(32).toString("hex");
-
-    await prisma.verificationToken.create({
+    await prisma.user.create({
 
       data: {
-
-        token: verificationToken,
-
-        userId: user.id,
-
-        expiresAt: new Date(
-          Date.now() + 1000 * 60 * 60
-        ),
-
+        name,
+        email,
+        password:
+          hashedPassword,
+        isVerified: true,
       },
-
-    });
-
-    await sendVerificationEmail({
-
-      email: user.email,
-
-      name: user.name || "Student",
-
-      token: verificationToken,
 
     });
 
     return NextResponse.json(
       {
         message:
-          "Account created. Verification email sent.",
+          "Account created successfully.",
       },
       {
         status: 201,
@@ -112,11 +88,15 @@ export async function POST(request: Request) {
 
   } catch (error) {
 
-    console.error("SIGNUP ERROR:", error);
+    console.error(
+      "SIGNUP ERROR:",
+      error
+    );
 
     return NextResponse.json(
       {
-        error: "Something went wrong.",
+        error:
+          "Something went wrong.",
       },
       {
         status: 500,
