@@ -31,29 +31,27 @@ export const {
           !credentials?.email ||
           !credentials?.password
         ) {
+
           return null;
+
         }
 
         const user =
           await prisma.user.findUnique({
 
             where: {
-              email: credentials.email as string,
+              email:
+                credentials.email as string,
             },
 
           });
 
-        if (!user || !user.password) {
+        if (
+          !user ||
+          !user.password
+        ) {
+
           return null;
-        }
-
-        // BLOCK UNVERIFIED USERS
-
-        if (!user.isVerified) {
-
-          throw new Error(
-            "Please verify your email first."
-          );
 
         }
 
@@ -64,13 +62,19 @@ export const {
           );
 
         if (!passwordsMatch) {
+
           return null;
+
         }
 
         return {
+
           id: user.id,
+
           name: user.name,
+
           email: user.email,
+
         };
 
       },
@@ -83,6 +87,7 @@ export const {
     strategy: "jwt",
   },
 
-  secret: process.env.AUTH_SECRET,
+  secret:
+    process.env.AUTH_SECRET,
 
 });
